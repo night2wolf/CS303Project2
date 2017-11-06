@@ -117,6 +117,9 @@
     <ClInclude Include="Binary_Search_Tree.h" />
     <ClInclude Include="Binary_Tree.h" />
     <ClInclude Include="BTNode.h" />
+    <ClInclude Include="File.h" />
+    <ClInclude Include="File_Manager.h" />
+    <ClInclude Include="Folder.h" />
     <ClInclude Include="String_Tokenizer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
