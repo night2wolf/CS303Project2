@@ -4,6 +4,7 @@
 #include <list>
 #include "String_Tokenizer.h"
 #include "Binary_Search_Tree.h"
+// This class is probably unnecessary but now i am too scared to remove it.
 #include "Binary_Tree.h"
 #include "Folder.h"
 using namespace std;
@@ -60,6 +61,7 @@ public:
 		// TODO: Tokenize Path and pass it as the destination folder name. Parse tree and search for folder.
 		Folder destination_folder;
 		folder_search_tree.find(destination_folder.get_name());
+		file_target = destination_folder.find_file(file_name);
 		return file_target;
 	}
 	list<File> get_files(string path, string file_name)

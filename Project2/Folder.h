@@ -48,9 +48,25 @@ public:
 	{
 		return file_list;
 	}
-	File find_file()
+	File find_file(string file_name)
 	{
-		
+		File target_file;
+		target_file.set_name(" ");
+		list<File>::iterator itr;
+		for (itr = file_list.begin(); itr != file_list.end(); itr++)
+		{
+			if( itr->get_name() == file_name)
+			{
+				target_file = *itr;
+				break;
+			}			
+		}
+		if(target_file.get_name() == " ")
+		{
+			// Should throw some kind of not found exception here.
+			return target_file;
+		}
+		return target_file;
 	}
 
 	Folder();
