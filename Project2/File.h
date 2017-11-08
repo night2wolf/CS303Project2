@@ -25,7 +25,7 @@ public:
 		return name;
 	}
 	File();
-	~File();
+	 ~File();
 
 private:
 	int Size;

@@ -13,7 +13,7 @@ public:
 	@param delim The string containing the delimeters. If
 	this parameter is omitted, a space character is assumed.
 	*/
-	string_tokenizer(std::string source, std::string delim = "/") :
+	string_tokenizer(std::string source, std::string delim = "") :
 		the_source(source), the_delim(delim), start(0), end(0) {
 		find_next();
 	}
