@@ -7,7 +7,7 @@ class Folder
 public:
 	int get_size()
 	{
-		int folder_size = Size;
+		int folder_size = Size;		
 		// If there are no files, the folder is empty and has a size of 0
 		if (file_list.size() == 0)
 		{
@@ -39,8 +39,7 @@ public:
 		return name;
 	}
 	void add_file(string name, int size)
-	{
-		
+	{		
 		File new_file;
 		new_file.set_name(name);
 		new_file.set_size(size);
@@ -54,17 +53,17 @@ public:
 	File find_file(string file_name)
 	{
 		File target_file;
-		target_file.set_name(" ");
+		target_file.set_name("");
 		list<File>::iterator itr;
 		for (itr = file_list.begin(); itr != file_list.end(); itr++)
 		{
 			if( itr->get_name() == file_name)
 			{
 				target_file = *itr;
-				break;
+				return target_file;
 			}			
 		}
-		if(target_file.get_name() == " ")
+		if(target_file.get_name() == "")
 		{
 			// Should throw some kind of not found exception here.
 			return target_file;
