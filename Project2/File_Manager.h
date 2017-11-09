@@ -1,11 +1,10 @@
 
 #include "File.h"
-#include <iostream>
 #include <list>
 #include "String_Tokenizer.h"
 #include "Binary_Search_Tree.h"
 // This class is probably unnecessary but now i am too scared to remove it.
-#include "Binary_Tree.h"
+// #include "Binary_Tree.h"
 #include "Folder.h"
 using namespace std;
 // Binary_Tree<Folder> folder_tree;
@@ -33,7 +32,6 @@ public:
 		}
 		// Fall here if entire path found
 		return true;
-
 	}
 
 
@@ -205,12 +203,29 @@ public:
 
 	File get_file(string path, string file_name)
 	{
-		File file_target;
-		// TODO: Tokenize Path and pass it as the destination folder name. Parse tree and search for folder.
-		Folder destination_folder;
-		//folder_search_tree.find(destination_folder.get_name());
-		//file_target = destination_folder.find_file(file_name);
-		return file_target;
+		string last_path;
+		File file;
+		string_tokenizer tokenizer(path, "/");
+		while (tokenizer.has_more_tokens())
+		{
+			string current_path = tokenizer.next_token();
+			last_path = tokenizer.next_token();
+			if (folder_search_tree.find(current_path) == NULL)
+			{
+				cout << "Cannot find with given path";
+				return file;
+			}
+		}
+		// Last token in path will be the folder we are looking to add a file in.
+		list<Folder>::iterator itr;
+		for (itr = folder_list.begin(); itr != folder_list.end(); itr++)
+		{
+			if (itr->get_name() == last_path)
+			{
+				file = (itr->find_file(file_name));
+			}
+		}
+		return file;
 	}
 
 	list<File> get_files(string path, string file_name)
