@@ -25,7 +25,7 @@ public:
 			string current_path = tokenizer.next_token();
 			if (tree.find(current_path) == NULL)
 			{
-				cout << "Cannot find with given path";
+				cout << "Cannot find with given path"<<endl;
 				return false;
 			}
 
@@ -40,14 +40,20 @@ public:
 		Folder folder;
 		folder.set_name(folder_name);
 		folder.set_size(folder.get_size());
-		// TODO: Tokenize Path and pass it as the destination folder name. Parse tree and search for folder.		
+		// TODO: Tokenize Path and pass it as the destination folder name. Parse tree and search for folder.	
+		if(folder_search_tree.is_null())
+		{
+			folder_search_tree.insert(folder_name);
+			folder_list.push_back(folder);
+			return;
+		}
 		string_tokenizer tokenizer(path, "/");
 		while (tokenizer.has_more_tokens())
 		{
 			string current_path = tokenizer.next_token();
 			if (folder_search_tree.find(current_path) == NULL)
 			{
-				cout << "Cannot find with given path";
+				cout << "Cannot find with given path" << endl;
 				return;
 			}
 		}
@@ -71,7 +77,7 @@ public:
 			string current_path = tokenizer.next_token();
 			if (folder_search_tree.find(current_path) == NULL)
 			{
-				cout << "Cannot find with given path";
+				cout << "Cannot find with given path" << endl;
 				return;
 			}
 			//find each folder in path and add size.
@@ -108,7 +114,7 @@ public:
 			string current_path = tokenizer.next_token();
 			if (folder_search_tree.find(current_path) == NULL)
 			{
-				cout << "Cannot find with given path";
+				cout << "Cannot find with given path"<<endl;
 				return;
 			}
 			//find each folder and remove them.
@@ -150,12 +156,9 @@ public:
 			last_path = tokenizer.next_token();
 			if (folder_search_tree.find(current_path) == NULL)
 			{
-				cout << "Cannot find with given path";
+				cout << "Cannot find with given path"<<endl;
 				return;
 			}
-			//find each folder and remove them.
-
-
 		}
 		// Last token in path will be the folder we are looking to add a file in.
 		list<Folder>::iterator itr;
@@ -183,7 +186,7 @@ public:
 			last_path = tokenizer.next_token();
 			if (folder_search_tree.find(current_path) == NULL)
 			{
-				cout << "Cannot find with given path";
+				cout << "Cannot find with given path"<<endl;
 				return;
 			}
 		}
@@ -212,7 +215,7 @@ public:
 			last_path = tokenizer.next_token();
 			if (folder_search_tree.find(current_path) == NULL)
 			{
-				cout << "Cannot find with given path";
+				cout << "Cannot find with given path"<<endl;
 				return file;
 			}
 		}
@@ -239,7 +242,7 @@ public:
 			last_path = tokenizer.next_token();
 			if (folder_search_tree.find(current_path) == NULL)
 			{
-				cout << "Cannot find with given path";
+				cout << "Cannot find with given path"<<endl;
 				return file_list;
 			}
 		}
