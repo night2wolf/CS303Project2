@@ -125,8 +125,6 @@ private:
 
 	std::string pre_order(const BTNode<Item_Type>* local_root) const;
 
-
-
 	std::string post_order(const BTNode<Item_Type>* local_root) const;
 
 	std::string in_order(const BTNode<Item_Type>* local_root) const;
@@ -305,6 +303,8 @@ std::string Binary_Tree<Item_Type>::pre_order(const BTNode<Item_Type>* local_roo
 	}
 	return result;
 }
+
+
 
 
 /** Return a post-order traversal of the tree */

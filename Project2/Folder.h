@@ -2,7 +2,7 @@
 // #include "File.h"
 
 using namespace std;
-// list<File> File_list;
+list<File> File_list;
 class Folder
 {
 public:
@@ -24,6 +24,10 @@ public:
 			}
 		}
 		return folder_size;
+	}
+	void set_size(int size)
+	{
+		Size = size;
 	}
 
 	string get_name()
@@ -67,6 +71,17 @@ public:
 			return target_file;
 		}
 		return target_file;
+	}
+	void delete_file(string file_name)
+	{
+		list<File>::iterator itr;
+		for (itr = file_list.begin(); itr != file_list.end(); itr++)
+		{
+			if (itr->get_name() == file_name)
+			{
+				file_list.erase((itr));				
+			}
+		}
 	}
 
 	Folder();
