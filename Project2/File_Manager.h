@@ -66,14 +66,15 @@ public:
 	}
 
 	// Calculate a folder's entire size
-	void get_folder_size(string path, string folder_name)
+	void get_folder_size(string path)
 	{
-
-		int total_size;
-		Folder folder;
-		folder.set_name(folder_name);
+		// This is calculating the wrong way...
+		int total_size =0;
+		// Folder folder;
+		// folder.set_name(folder_name);
 		// folder.get_size();
 		string_tokenizer tokenizer(path, "/");
+		string first_path = tokenizer.next_token();		
 		while (tokenizer.has_more_tokens())
 		{
 			string current_path = tokenizer.next_token();
@@ -90,26 +91,28 @@ public:
 			}
 		}
 		//once we have all the folders we can set total size
-		folder.set_size(total_size);
+		// folder.set_size(total_size);
 		list<Folder>::iterator itr;
 		for (itr = folder_list.begin(); itr != folder_list.end(); itr++)
 		{
 			Folder current_folder = *itr;
-			if (current_folder.get_name() == folder_name)
+			if (current_folder.get_name() == first_path)
 			{
-				folder.set_size(total_size + itr->get_size());
-				folder_list.erase((itr));
-				folder_list.push_back(folder);
+				//folder.set_size(total_size + itr->get_size());
+				//folder_list.erase((itr));
+				//folder_list.push_back(folder);
+				itr->set_size(itr->get_size() + total_size);
 				return;
 			}
 		}
+		// get_folder_size(path);
 		
 	}
 
 	//Delete Folder from tree and list
 	void delete_folder(string path, string folder_name)
 	{
-		// Come back to this. might be removing the wrong folders...
+		// Make sure valid path.
 		Folder folder;
 		folder.set_name(folder_name);		
 		string_tokenizer tokenizer(path, "/");
@@ -121,7 +124,8 @@ public:
 				cout << "Cannot find with given path"<<endl;
 				return;
 			}
-			//find each folder and remove them from the folder list.
+			//find each folder and remove them from the folder list. This is backwards and removes everything up the tree... Removing
+			/*
 			list<Folder>::iterator itr;
 			for (itr = folder_list.begin(); itr != folder_list.end(); itr++)
 			{
@@ -130,8 +134,9 @@ public:
 					folder_list.erase((itr));
 				}
 			}
+			*/
 		}
-		//once we have removed all folders we can remove the folder from list as well.	
+		//remove the folder from list.	
 		list<Folder>::iterator itr;
 		for (itr = folder_list.begin(); itr != folder_list.end(); itr++)
 		{
@@ -140,8 +145,11 @@ public:
 				folder_list.erase((itr));
 			}
 		}
-		// Once we get here we have removed all lower folders from list.Remove folder from tree.
+		// Remove Folder from tree
 		folder_search_tree.erase(folder_name);
+		// Re-Calculate folder sizes
+		get_folder_size(path);
+		
 
 	}
 	//Find a destination folder and add a file inside it using a list.
@@ -169,6 +177,8 @@ public:
 			}
 
 		}
+		//Re-Calculate Folder sizes
+		get_folder_size(path);
 	}
 	// Find a desired file in a folder path and delete it
 	void delete_file(string path, string file_name)
@@ -194,6 +204,8 @@ public:
 				itr->delete_file(file_name);
 			}
 		}
+		// Re-Calculate Folder Sizes
+		get_folder_size(path);
 	}
 	// Find a desired file and return it
 	File get_file(string path, string file_name)
@@ -208,6 +220,7 @@ public:
 			if (folder_search_tree.find(current_path) == NULL)
 			{
 				cout << "Cannot find with given path"<<endl;
+				// return an empty file object.
 				return file;
 			}
 		}
@@ -218,8 +231,11 @@ public:
 			if (itr->get_name() == last_path)
 			{
 				file = (itr->find_file(file_name));
+				// return the file when we find it.
+				return file;
 			}
 		}
+		// returns empty if we can't find it in the folder...
 		return file;
 	}
 	// Find all files with a file name in a desired path
@@ -235,6 +251,7 @@ public:
 			if (folder_search_tree.find(current_path) == NULL)
 			{
 				cout << "Cannot find with given path"<<endl;
+				//returns an empty list
 				return file_list;
 			}
 		}
