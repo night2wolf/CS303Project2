@@ -143,12 +143,17 @@ public:
 			if (itr->get_name() == folder_name)
 			{
 				folder_list.erase((itr));
+				// Remove Folder from tree
+				folder_search_tree.erase(folder_name);
+				// Re-Calculate folder sizes
+				get_folder_size(path);
+				return;
 			}
 		}
-		// Remove Folder from tree
-		folder_search_tree.erase(folder_name);
-		// Re-Calculate folder sizes
-		get_folder_size(path);
+		
+		
+		
+		
 		
 
 	}
